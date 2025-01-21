@@ -1,0 +1,15 @@
+const { Router } = require('express');
+const pool = require('../db');
+
+const router = Router();
+
+router.get('/api/Swiper', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM swiper');
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching swipers' });
+  }
+});
+
+module.exports = router;
